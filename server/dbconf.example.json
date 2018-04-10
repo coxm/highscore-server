@@ -1,0 +1,15 @@
+{
+	"client": "pg",
+	"connection": {
+		"user": "highscoresuser",
+		"password": "somesecretstring",
+		"database": "highscoresdb"
+	},
+	"pool": {
+		"min": 2,
+		"max": 10
+	},
+	"migrations": {
+		"tableName": "knex_migrations"
+	}
+}
