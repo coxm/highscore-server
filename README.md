@@ -1,5 +1,35 @@
 # Highscore server
-## Quick start
+A RESTful high score server with API keys. Implemented in JS with Express.
+
+
+## Usage
+To get and set scores, create a context in the database with a `name` and
+`api_key`, say `"My compo"` and `my-compo-2018`. Then scores can be retrieved
+by sending a GET request to `/scores?ctx=my-compo-2018`, and set by sending a
+POST request to the same URL, with JSON data resembling the following object.
+
+    {
+        "player": "playername",
+        "score": 99,
+        "proof": "optional string providing proof of the score"
+    }
+
+
+## Filtering
+This API supports a limited form of Django-style filtering. The suffixes
+`lt`, `lte`, `gt`, `gte`, `eq`, `neq` (corresponding to relations `<`, `<=`,
+`>`, `>=`, `==` and `!=`) are supported; all can be used for filtering score
+values, and `eq`/`neq` can be used to compare player names.
+
+    GET /scores?ctx=my-api-key&score__gte=100
+    GET /scores?ctx=my-api-key&player__eq=sonic
+
+Filters can also be combined:
+
+    GET /scores?ctx=my-api-key&player__eq=sonic&score__gte=100&score__lt=200
+
+
+## Getting started
 Install dependencies:
 
     npm install  # Or `yarn install`.
