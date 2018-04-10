@@ -34,11 +34,11 @@ Install dependencies:
 
     npm install  # Or `yarn install`.
 
-Create a `dbconf.js` or `dbconf.json` file configuring your database (see [the
-knex documentation](http://knexjs.org/#Installation-client) for more info). For
-example, if using postgres (the default) you might have:
+Create a `server/dbconf.js` or `server/dbconf.json` file configuring your
+database (see [the knex documentation](http://knexjs.org/#Installation-client)
+for more info). For example, if using postgres (the default) you might have:
 
-    // dbconf.json
+    // server/dbconf.json
     {
         "client": "pg",
         "connection": {
