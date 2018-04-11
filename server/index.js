@@ -10,6 +10,7 @@ const knex = require('knex')(require('./dbconf'));
 const validators = require('./validators');
 const aggregateFilters = require('./filters').aggregate;
 const logRequestMiddleware = require('./middleware').logRequest;
+const evaluateScore = require('./scoring').evaluate;
 
 
 async function getContext(req) {
@@ -98,9 +99,9 @@ app.post('/scores', async function app_POST_scores(req, res) {
   if (!player.valid) {
     return res.status(400).send('Invalid player name');
   }
-  const score = validators.numeric(body.score);
-  if (!score.valid) {
-    return res.status(400).send('Invalid score');
+  const score = evaluateScore(body.proof);
+  if (score.error) {
+    return res.status(400).send(score.error);
   }
 	const context = await getContext(req);
   if (!context) {
