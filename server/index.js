@@ -78,14 +78,14 @@ app.get('/scores', async function app_GET_scores(req, res) {
   if (filterObj.error) {
     return res.status(400).send(filterObj.error);
   }
-  let query = filterObj.filter(knex.select('*').from('score'));
+  let query = filterObj.filter(knex.select(['player', 'score']).from('score'));
 
   // Apply limit.
   if (limit > 0) {
     query = query.limit(limit);
   }
 
-  res.json(await query);
+  res.json({scores: await query});
 });
 
 
