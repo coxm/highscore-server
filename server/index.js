@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Environment variables.
 const PORT = process.env.PORT ? +process.env.PORT : 8080;
-const HOST = process.env.HOST;
+const HOST = process.env.HOST || 'localhost';
 
 
 const express = require('express');
@@ -119,4 +119,7 @@ app.post('/scores', async function app_POST_scores(req, res) {
 });
 
 
-app.listen(PORT, HOST);
+app.listen(PORT, HOST, err => {
+  if (err) console.error('Error:', err);
+  else console.log('Listening on %s:%s', HOST, PORT);
+});
