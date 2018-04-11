@@ -18,7 +18,7 @@ module.exports.integer = integer;
 
 const positiveInteger = value => {
   value = +value;
-  return {valud: value > 0 && value === (value|0), value};
+  return {valid: value > 0 && value === (value|0), value};
 };
 module.exports.positiveInteger = positiveInteger;
 
