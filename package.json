@@ -1,21 +1,37 @@
 {
-  "name": "highscore",
+  "name": "highscore-server",
   "version": "0.0.0",
-  "description": "",
+  "description": "A RESTful high score server",
   "main": "server/index.js",
   "scripts": {
-    "migrate": "knex migrate:latest --env=production",
-    "start": "node server/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "toastio",
-  "license": "GPL-3.0",
-  "devDependencies": {
-    "uglify-es": "^3.3.9"
+  "author": {
+    "name": "coxm",
+    "email": "coxm@users.noreply.github.com"
   },
-  "dependencies": {
+  "license": "MIT",
+  "peerDependencies": {
     "express": "^4.16.3",
-    "knex": "^0.14.5",
+    "knex": "^0.14.5"
+  },
+  "optionalDependencies": {
     "pg": "^7.4.1"
-  }
+  },
+  "directories": {
+    "example": "example",
+    "lib": "lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/coxm/highscore-server.git"
+  },
+  "keywords": [
+    "highscore",
+    "server"
+  ],
+  "bugs": {
+    "url": "https://github.com/coxm/highscore-server/issues"
+  },
+  "homepage": "https://github.com/coxm/highscore-server#readme"
 }

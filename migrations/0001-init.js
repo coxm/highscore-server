@@ -3,7 +3,7 @@ module.exports.up = knex => Promise.all([
     if (!exists) {
       await knex.schema.createTable('context', table => {
         table.increments('id').primary();
-        table.string('name', 32).notNullable().index().unique();
+        table.string('name', 32).notNullable();
         table.string('api_key', 64).notNullable().index().unique();
         table.timestamps(false, true);
       });
@@ -26,6 +26,6 @@ module.exports.up = knex => Promise.all([
 
 
 module.exports.down = knex => Promise.all([
-  knex.schema.dropTableIfExists('context'),
   knex.schema.dropTableIfExists('score'),
+  knex.schema.dropTableIfExists('context'),
 ]);
