@@ -4,6 +4,7 @@
   "description": "",
   "main": "server/index.js",
   "scripts": {
+    "migrate": "knex migrate:latest --env=production",
     "start": "node server/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
