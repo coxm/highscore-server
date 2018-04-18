@@ -12,11 +12,11 @@ const ScoreServer = require('../lib/Server').Server;
 
 
 const dbConfig = require('./knexfile').development;
-const knex = require('knex')(dbConfig);
+const db = require('knex')(dbConfig);
 
 
 /** Filters allowed on each table. */
-const allowedFilters = {
+const filters = {
   score: {
     relations: ['lt', 'lte', 'gt', 'gte', 'eq', 'neq'],
     valid: validators.numeric,
@@ -29,20 +29,34 @@ const allowedFilters = {
 
 
 /**
- * Simple score evaluation function.
+ * Score evaluation function.
  *
- * Trusts a submitted score unless it's unbelievably big.
+ * Calculates a score and optionally dictates how trustworthy it is.
  */
-const evaluateScore = body => ({
-  value: body.score,
-  error: body.score > 100 ? "Nobody's that good" : ''
-});
+const evaluate = body => {
+  const value = body.score;
+  if (typeof value !== 'number') {
+    return {value: 0, error: 'Expected a numeric score'};
+  }
+
+  let trust = 0.0;
+  if (value > 100) {
+    trust = 0.0;
+  }
+  else if (value > 50) {
+    trust = 0.5;
+  }
+  else {
+    trust = 1.0;
+  }
+  return {value, trust, error: ''};
+};
 
 
 const scores = new ScoreServer({
-  db: knex,
-  filters: allowedFilters,
-  evaluate: evaluateScore,
+  db,
+  filters,
+  evaluate,
 });
 
 

@@ -17,6 +17,7 @@ module.exports.up = knex => Promise.all([
         table.string('player', 32).notNullable().index();
         table.integer('context').unsigned().references('context.id');
         table.float('value').notNullable();
+        table.float('trust').nullable();
         table.jsonb('proof');
         table.timestamps(false, true);
       });
