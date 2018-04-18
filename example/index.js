@@ -5,24 +5,14 @@ const HOST = process.env.HOST || 'localhost';
 
 
 const express = require('express');
-const lib = require('./lib');
+
+const validators = require('../lib/validators');
+const middleware = require('../lib/middleware');
+const ScoreServer = require('../lib/Server').Server;
 
 
-const knex = require('knex')({
-  "client": "pg",
-  "connection": {
-    "user": "highscore",
-    "password": "password",
-    "database": "highscores"
-  },
-  "pool": {
-    "min": 2,
-    "max": 10
-  },
-  "migrations": {
-    "tableName": "knex_migrations"
-  }
-});
+const dbConfig = require('./knexfile').development;
+const knex = require('knex')(dbConfig);
 
 
 /** Filters allowed on each table. */
@@ -49,8 +39,8 @@ const evaluateScore = body => ({
 });
 
 
-const scores = new lib.Server({
-  db: require('knex')(require('./dbconf')),
+const scores = new ScoreServer({
+  db: knex,
   filters: allowedFilters,
   evaluate: evaluateScore,
 });
@@ -64,3 +54,8 @@ app.use(middleware.handleErrors);
 
 app.get('/scores', (req, res) => scores.retrieve(req, res));
 app.post('/scores', (req, res) => scores.insert(req, res));
+
+
+app.listen(PORT, HOST, () => {
+  console.log('Listening on %s:%s', HOST, PORT);
+});

@@ -16,7 +16,8 @@
     "knex": "^0.14.5"
   },
   "optionalDependencies": {
-    "pg": "^7.4.1"
+    "pg": "^7.4.1",
+    "sqlite3": "^4.0.0"
   },
   "directories": {
     "example": "example",
@@ -33,5 +34,9 @@
   "bugs": {
     "url": "https://github.com/coxm/highscore-server/issues"
   },
-  "homepage": "https://github.com/coxm/highscore-server#readme"
+  "homepage": "https://github.com/coxm/highscore-server#readme",
+  "dependencies": {
+    "express": "^4.16.3",
+    "knex": "^0.14.6"
+  }
 }
