@@ -13,9 +13,7 @@
   "license": "MIT",
   "peerDependencies": {
     "express": "^4.16.3",
-    "knex": "^0.14.5"
-  },
-  "optionalDependencies": {
+    "knex": "^0.14.5",
     "pg": "^7.4.1"
   },
   "directories": {
