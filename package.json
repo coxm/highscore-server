@@ -1,6 +1,6 @@
 {
   "name": "highscore-server",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A RESTful high score server",
   "main": "server/index.js",
   "scripts": {
